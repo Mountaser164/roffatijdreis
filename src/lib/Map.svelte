@@ -3,14 +3,25 @@
 	import 'maplibre-gl/dist/maplibre-gl.css';
 	import maplibregl from 'maplibre-gl';
 	import { WarpedMapLayer } from '@allmaps/maplibre';
+	import { viewState } from './store.svelte';
 
 	let mapElement: HTMLDivElement;
 	let map: any;
 	let isHistoricalVisible: boolean = true;
+	let loaded: boolean = false;
 
 	const annotationUrl = 'https://annotations.allmaps.org/maps/f216cd0b2a7c8a27';
 
 	const warpedMapLayer = new WarpedMapLayer();
+
+	let opacity = $state(viewState.opacity);
+	$inspect(opacity);
+
+	$effect(() => {
+		if (loaded) {
+			warpedMapLayer.setOpacity(opacity);
+		}
+	});
 
 	onMount(async () => {
 		// Initialiseer de kaart - centreer op Rotterdam
@@ -27,6 +38,7 @@
 		map.on('load', async () => {
 			map.addLayer(warpedMapLayer);
 			warpedMapLayer.addGeoreferenceAnnotationByUrl(annotationUrl);
+			loaded = true;
 		});
 	});
 
@@ -46,4 +58,4 @@
 
 <svelte:window on:keydown={toggleMap} on:keyup={toggleMap} />
 
-<div bind:this={mapElement} class="absolute h-screen w-screen"></div>
+<div bind:this={mapElement} class="absolute inset-0 h-full w-full"></div>
