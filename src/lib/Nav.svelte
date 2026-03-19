@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { viewState } from './store.svelte';
 
-	let opacityFromSlider: number = $state(100);
+	const initialOpacity = viewState.opacity;
 
-	$effect(() => {
-		viewState.opacity = opacityFromSlider;
-	});
+	function updateViewState(e: Event) {
+		const element = e.currentTarget as HTMLInputElement;
+		viewState.opacity = parseInt(element.value);
+	}
 </script>
 
 <!-- Sidebar rechts -->
@@ -28,7 +29,8 @@
 
 	<div>
 		<input
-			bind:value={opacityFromSlider}
+			on:input={updateViewState}
+			value={initialOpacity}
 			type="range"
 			id="opacity"
 			name="opacity"

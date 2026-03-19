@@ -8,14 +8,12 @@
 	let mapElement: HTMLDivElement;
 	let map: any;
 	let isHistoricalVisible: boolean = true;
-	let loaded: boolean = false;
+	let loaded: boolean = $state(false);
+	let opacity = $derived(viewState.opacity / 100);
 
 	const annotationUrl = 'https://annotations.allmaps.org/maps/f216cd0b2a7c8a27';
 
 	const warpedMapLayer = new WarpedMapLayer();
-
-	let opacity = $state(viewState.opacity);
-	$inspect(opacity);
 
 	$effect(() => {
 		if (loaded) {
