@@ -1,12 +1,5 @@
 <script lang="ts">
 	import { viewState } from './store.svelte';
-
-	const initialOpacity = viewState.opacity;
-
-	function updateViewState(e: Event) {
-		const element = e.currentTarget as HTMLInputElement;
-		viewState.opacity = parseInt(element.value);
-	}
 </script>
 
 <!-- Sidebar rechts -->
@@ -29,8 +22,7 @@
 
 	<div>
 		<input
-			on:input={updateViewState}
-			value={initialOpacity}
+			bind:value={viewState.opacity}
 			type="range"
 			id="opacity"
 			name="opacity"

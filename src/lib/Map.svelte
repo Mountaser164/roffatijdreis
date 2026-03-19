@@ -7,7 +7,7 @@
 
 	let mapElement: HTMLDivElement;
 	let map: any;
-	let isHistoricalVisible: boolean = true;
+	let previousOpacity: number | undefined;
 	let loaded: boolean = $state(false);
 	let opacity = $derived(viewState.opacity / 100);
 
@@ -43,12 +43,12 @@
 	function toggleMap(event: KeyboardEvent) {
 		if (event.repeat) return;
 		if (event.code === 'Space') {
-			if (isHistoricalVisible) {
-				warpedMapLayer.setOpacity(0);
-				isHistoricalVisible = false;
+			if (previousOpacity === undefined) {
+				previousOpacity = viewState.opacity;
+				viewState.opacity = 0;
 			} else {
-				warpedMapLayer.setOpacity(1);
-				isHistoricalVisible = true;
+				viewState.opacity = previousOpacity;
+				previousOpacity = undefined;
 			}
 		}
 	}
