@@ -26,6 +26,7 @@
 			</div>
 		</div>
 	</nav>
+	<br>
 
 	<!-- Kaart + Sidebar -->
 	<div class="flex flex-1 flex-row overflow-hidden">
