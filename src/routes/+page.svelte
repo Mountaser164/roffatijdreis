@@ -4,11 +4,9 @@
 </script>
 
 <div class="flex h-screen flex-col">
-	<header class="flex-none shrink-0 bg-gray-800 p-4 text-white">
-		<h1 class="text-2xl font-bold">Roffa reis door de tijd</h1>
-	</header>
+	
 
-	<nav class="flex flex-none items-center justify-between bg-gray-700 px-4 py-2 text-white">
+<nav class="flex flex-none items-center justify-between bg-green-700 px-4 py-2 text-white" style="font-family: 'Barlow Condensed', sans-serif;">
 		<div class="flex items-center gap-3">
 			<div class="flex items-center space-x-35">
 				<div class="flex items-center rounded bg-white px-2 py-1">
@@ -22,21 +20,33 @@
     </svg>
 </div>
 
-				<a href="/" class="hover:text-yellow-400">Kaart</a>
-				<a href="/over" class="hover:text-yellow-400">Collecties</a>
+
+
+<button class="flex items-center justify-center gap-2 rounded border border-gray-400 px-2 py-1 text-sm font-semibold text-white hover:bg-gray-600 w-50 h-[50px]">
+    Vergelijken
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 10h4M15 3h4a2 2 0 0 0 2 2v14a2 2 0 0 0-2 2h-4M12 3v18" />
+    </svg>
+</button>
+
+
+                 <h1 class="text-2xl font-bold" style="font-family: 'Barlow Condensed', sans-serif;">Roffa reis door de tijd</h1>
 				<a href="/tijdlijn" class="hover:text-yellow-400">Over</a>
-				<a href="/tijdlijn" class="hover:text-yellow-400">Help</a>
+				<a href="/tijdlijn" class="hover:text-yellow-400">Delen</a>
 			</div>
 		</div>
 	</nav>
 	
 
+
+
 	<!-- Kaart + Sidebar -->
-	<div class="flex flex-1 flex-row overflow-hidden">
-		<!-- Kaart links -->
-		<div class="relative flex-1 grow">
-			<Map />
-		</div>
-		<Nav></Nav>
-	</div>
+<div class="flex flex-1 flex-row overflow-hidden">
+    <Nav></Nav>
+    <!-- Kaart rechts -->
+    <div class="relative flex-1 grow">
+        <Map />
+    </div>
+</div>
+
 </div>

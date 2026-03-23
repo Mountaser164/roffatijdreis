@@ -3,37 +3,63 @@
 </script>
 
 <!-- Sidebar rechts -->
-<aside class="w-68 flex-none overflow-y-auto bg-blue-50 p-4">
-	<h2 class="mb-8 text-lg font-bold">Contents</h2>
-	<ul class="flex flex-col gap-6">
-		<li><a href="#dates" class="hover:text-purple-600">Dates</a></li>
-		<li>
-			<a href="#location" class="border-l-2 border-purple-600 pl-2 text-purple-600">Location</a>
-		</li>
-		<li><a href="#organisers" class="hover:text-purple-600">Organisers</a></li>
-		<li><a href="#partners" class="hover:text-purple-600">Partners</a></li>
-		<li><a href="#costs" class="hover:text-purple-600">Costs</a></li>
-		<li><a href="#participants" class="hover:text-purple-600">Participants</a></li>
-	</ul>
+<aside class="w-68 flex-none overflow-y-auto bg-gray-50 p-4" style="font-family: 'Barlow Condensed', sans-serif;">
+	<h2 class="mb-8 text-lg font-bold">Kaartcollectie</h2>
+	<ul class="flex flex-col divide-y divide-gray-200">
+    <li>
+        <a href="#1850" class="flex items-center gap-3 bg-gray-800 px-3 py-2 text-white hover:bg-gray-700">
+            <span class="text-xs font-bold text-orange-400">1850</span>
+            <span class="font-semibold">Kadasterkaart</span>
+        </a>
+    </li>
+    <li>
+        <a href="#1890" class="flex items-center gap-3 px-3 py-2 hover:bg-gray-200">
+            <span class="text-xs font-bold text-orange-400">1890</span>
+            <span>Stadsuitbreiding</span>
+        </a>
+    </li>
+    <li>
+        <a href="#1920" class="flex items-center gap-3 px-3 py-2 hover:bg-gray-200">
+            <span class="text-xs font-bold text-orange-400">1920</span>
+            <span>Topografische kaart</span>
+        </a>
+    </li>
+    <li>
+        <a href="#1940" class="flex items-center gap-3 px-3 py-2 hover:bg-gray-200">
+            <span class="text-xs font-bold text-orange-400">1940</span>
+            <span>Vóór bombardement</span>
+        </a>
+    </li>
+    <li>
+        <a href="#1960" class="flex items-center gap-3 px-3 py-2 hover:bg-gray-200">
+            <span class="text-xs font-bold text-blue-500">1960</span>
+            <span>Wederopbouw</span>
+        </a>
+    </li>
+    <li>
+        <a href="#1980" class="flex items-center gap-3 px-3 py-2 hover:bg-gray-200">
+            <span class="text-xs font-bold text-blue-500">1980</span>
+            <span>Moderne atlas</span>
+        </a>
+    </li>
+</ul>
 
-	<br /><br />
 
-	<p>Audio settings:</p>
-
-	<div>
-		<input
-			bind:value={viewState.opacity}
-			type="range"
-			id="opacity"
-			name="opacity"
-			min="0"
-			max="100"
-		/>
-		<label for="opacity">Opacity</label>
-	</div>
-
-	<div>
-		<input type="range" id="cowbell" name="cowbell" min="0" max="100" value="90" step="10" />
-		<label for="cowbell">Cowbell</label>
-	</div>
+	<div class="mt-6 border-t border-gray-200 pt-4">
+    <p class="mb-3 text-xs font-bold uppercase tracking-widest text-gray-500">Transparantie historische laag</p>
+    <input
+        bind:value={viewState.opacity}
+        type="range"
+        id="opacity"
+        name="opacity"
+        min="0"
+        max="100"
+        class="w-full accent-green-700"
+    />
+    <div class="mt-1 flex justify-between text-xs text-gray-400">
+        <span>0%</span>
+        <span class="font-bold text-gray-700">{viewState.opacity}%</span>
+        <span>100%</span>
+    </div>
+</div>
 </aside>
