@@ -11,14 +11,17 @@
 	<nav class="flex flex-none items-center justify-between bg-gray-700 px-4 py-2 text-white">
 		<div class="flex items-center gap-3">
 			<div class="flex items-center space-x-35">
-				<a href="/" class="hover:text-yellow-400">
-					<img
-						src="https://cdn.vectorstock.com/i/1000v/71/04/rotterdam-logo-vector-50887104.jpg"
-						alt="Roffa logo"
-						class="h-8 w-auto object-contain"
-						loading="lazy"
-					/>
-				</a>
+				<div class="flex items-center rounded bg-white px-2 py-1">
+    <input
+        type="text"
+        placeholder="Zoek locatie..."
+        class="w-48 bg-transparent text-gray-800 text-sm outline-none"
+    />
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+    </svg>
+</div>
+
 				<a href="/" class="hover:text-yellow-400">Kaart</a>
 				<a href="/over" class="hover:text-yellow-400">Collecties</a>
 				<a href="/tijdlijn" class="hover:text-yellow-400">Over</a>
@@ -26,7 +29,7 @@
 			</div>
 		</div>
 	</nav>
-	<br>
+	
 
 	<!-- Kaart + Sidebar -->
 	<div class="flex flex-1 flex-row overflow-hidden">
