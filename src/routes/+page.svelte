@@ -1,6 +1,7 @@
 <script>
 	import Map from '$lib/Map.svelte';
 	import Nav from '$lib/Nav.svelte';
+    import { base } from '$app/paths';
 </script>
 
 <div class="flex h-screen flex-col">
@@ -31,8 +32,8 @@
 
 
                  <h1 class="text-2xl font-bold" style="font-family: 'Barlow Condensed', sans-serif;">Roffa reis door de tijd</h1>
-				<a href="/tijdlijn" class="hover:text-yellow-400">Over</a>
-				<a href="/tijdlijn" class="hover:text-yellow-400">Delen</a>
+				<a href="{base}/tijdlijn">Over</a>
+                <a href="{base}/tijdlijn">Delen</a>
 			</div>
 		</div>
 	</nav>
