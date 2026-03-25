@@ -7,41 +7,41 @@
 	<h2 class="mb-8 text-lg font-bold">Kaartcollectie</h2>
 	<ul class="flex flex-col divide-y divide-gray-200">
     <li>
-        <a href="#1850" class="flex items-center gap-3 bg-gray-800 px-3 py-2 text-white hover:bg-gray-700">
-            <span class="text-xs font-bold text-orange-400">1850</span>
-            <span class="font-semibold">Kadasterkaart</span>
-        </a>
-    </li>
-    <li>
-        <a href="#1890" class="flex items-center gap-3 px-3 py-2 hover:bg-gray-200">
-            <span class="text-xs font-bold text-orange-400">1890</span>
-            <span>Stadsuitbreiding</span>
-        </a>
-    </li>
-    <li>
-        <a href="#1920" class="flex items-center gap-3 px-3 py-2 hover:bg-gray-200">
-            <span class="text-xs font-bold text-orange-400">1920</span>
-            <span>Topografische kaart</span>
-        </a>
-    </li>
-    <li>
-        <a href="#1940" class="flex items-center gap-3 px-3 py-2 hover:bg-gray-200">
-            <span class="text-xs font-bold text-orange-400">1940</span>
-            <span>Vóór bombardement</span>
-        </a>
-    </li>
-    <li>
-        <a href="#1960" class="flex items-center gap-3 px-3 py-2 hover:bg-gray-200">
-            <span class="text-xs font-bold text-blue-500">1960</span>
-            <span>Wederopbouw</span>
-        </a>
-    </li>
-    <li>
-        <a href="#1980" class="flex items-center gap-3 px-3 py-2 hover:bg-gray-200">
-            <span class="text-xs font-bold text-blue-500">1980</span>
-            <span>Moderne atlas</span>
-        </a>
-    </li>
+    <a href="/" class="flex items-center gap-3 bg-gray-800 px-3 py-2 text-white hover:bg-gray-700">
+        <span class="text-xs font-bold text-orange-400">1850</span>
+        <span class="font-semibold">Kadasterkaart</span>
+    </a>
+</li>
+<li>
+    <a href="/" class="flex items-center gap-3 px-3 py-2 hover:bg-gray-200">
+        <span class="text-xs font-bold text-orange-400">1890</span>
+        <span>Stadsuitbreiding</span>
+    </a>
+</li>
+<li>
+    <a href="/" class="flex items-center gap-3 px-3 py-2 hover:bg-gray-200">
+        <span class="text-xs font-bold text-orange-400">1920</span>
+        <span>Topografische kaart</span>
+    </a>
+</li>
+<li>
+    <a href="/" class="flex items-center gap-3 px-3 py-2 hover:bg-gray-200">
+        <span class="text-xs font-bold text-orange-400">1940</span>
+        <span>Vóór bombardement</span>
+    </a>
+</li>
+<li>
+    <a href="/" class="flex items-center gap-3 px-3 py-2 hover:bg-gray-200">
+        <span class="text-xs font-bold text-blue-500">1960</span>
+        <span>Wederopbouw</span>
+    </a>
+</li>
+<li>
+    <a href="/" class="flex items-center gap-3 px-3 py-2 hover:bg-gray-200">
+        <span class="text-xs font-bold text-blue-500">1980</span>
+        <span>Moderne atlas</span>
+    </a>
+</li>
 </ul>
 
 
