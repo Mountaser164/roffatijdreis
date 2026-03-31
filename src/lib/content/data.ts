@@ -1,4 +1,6 @@
-const maps = [
+import type { MapMetadata } from "$lib/types";
+
+const maps: MapMetadata[] = [
 	{
 		label: 'Nieuwe platte grond der stad Rotterdam',
 		title:
@@ -37,12 +39,12 @@ const maps = [
 		title: '245 - Basisplan en Bestemmingen binnenstad Rotterdam. Z.n. Z.p.',
 		year: 1946,
 		institution: 'Nationaal Archief',
-		uri: 'https://www.nationaalarchief.nl/onderzoeken/archief/4.ZHPB1/invnr/245/file/NL-HaNA_4.ZHPB1_245_0001',
+		url: 'https://www.nationaalarchief.nl/onderzoeken/archief/4.ZHPB1/invnr/245/file/NL-HaNA_4.ZHPB1_245_0001',
 		iiif: {
-			uri: 'https://service.archief.nl/iipsrv?IIIF=/d8/47/27/f5/e1/fb/45/8b/b4/b5/38/b8/c1/c3/eb/1a/2d2b7cdd-4687-417a-8bea-95c2f62347d5.jp2',
+			url: 'https://service.archief.nl/iipsrv?IIIF=/d8/47/27/f5/e1/fb/45/8b/b4/b5/38/b8/c1/c3/eb/1a/2d2b7cdd-4687-417a-8bea-95c2f62347d5.jp2',
 			type: 'image'
 		},
-		url: 'https://annotations.allmaps.org/images/fe1800c9d37d381c'
+		annotation: 'https://annotations.allmaps.org/images/fe1800c9d37d381c'
 	}
 ];
 

@@ -10,16 +10,29 @@
 	let previousOpacity: number | undefined;
 	let loaded: boolean = $state(false);
 	let opacity = $derived(viewState.opacity / 100);
-
-	const annotationUrl = 'https://annotations.allmaps.org/maps/f216cd0b2a7c8a27';
+	let annotationUrl = $derived(viewState.annotation);
 
 	const warpedMapLayer = new WarpedMapLayer();
 
 	$effect(() => {
-		if (loaded) {
-			warpedMapLayer.setOpacity(opacity);
+		if (loaded && annotationUrl) {
+			warpedMapLayer.clear();
+			warpedMapLayer.addGeoreferenceAnnotationByUrl(annotationUrl);
 		}
 	});
+
+// 	$effect(() => {
+//     if (loaded && opacity) {
+//         warpedMapLayer.setOpacity(opacity);
+//     }
+// });
+
+$effect(() => {
+    if (loaded && annotationUrl && opacity != null) {
+        warpedMapLayer.setOpacity(opacity);
+    }
+});
+
 
 	onMount(async () => {
 		// Initialiseer de kaart - centreer op Rotterdam
@@ -35,7 +48,6 @@
 
 		map.on('load', async () => {
 			map.addLayer(warpedMapLayer);
-			warpedMapLayer.addGeoreferenceAnnotationByUrl(annotationUrl);
 			loaded = true;
 		});
 	});
@@ -52,6 +64,8 @@
 			}
 		}
 	}
+
+	
 </script>
 
 <svelte:window on:keydown={toggleMap} on:keyup={toggleMap} />
