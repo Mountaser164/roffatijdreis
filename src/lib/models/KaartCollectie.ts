@@ -1,4 +1,5 @@
 import { KaartItem } from './KaartItem';
+
 import data from '../content/data';
 
 export class KaartCollectie {

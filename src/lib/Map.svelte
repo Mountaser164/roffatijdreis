@@ -21,17 +21,12 @@
 		}
 	});
 
-// 	$effect(() => {
-//     if (loaded && opacity) {
-//         warpedMapLayer.setOpacity(opacity);
-//     }
-// });
-
-$effect(() => {
-    if (loaded && annotationUrl && opacity != null) {
+	$effect(() => {
+    if (loaded && opacity) {
         warpedMapLayer.setOpacity(opacity);
     }
 });
+
 
 
 	onMount(async () => {

@@ -3,8 +3,7 @@
 	import { viewState } from './store.svelte';
 	import { base } from '$app/paths';
 
-	// const collectie = new KaartCollectie();
-	// let kaarten = collectie.getAlleKaarten();
+	
 
     const collectie = new KaartCollectie();
     let kaarten = collectie.getAlleKaarten();
