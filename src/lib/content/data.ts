@@ -45,6 +45,14 @@ const maps: MapMetadata[] = [
 			type: 'image'
 		},
 		annotation: 'https://annotations.allmaps.org/images/fe1800c9d37d381c'
+	},
+	{
+		label: 'Kaart van het centrum van Rotterdam voor mei 1940',
+		title: 'Kaart van het centrum van Rotterdam voor mei 1940',
+		year: 1940,
+		institution: 'Stadsarchief Rotterdam',
+		url: 'https://observablehq.com/@ambassadors/geographical-features-imports',
+		annotation: 'https://annotations.allmaps.org/images/3429af1e1e579426'
 	}
 ];
 
