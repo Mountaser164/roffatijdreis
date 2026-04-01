@@ -1,4 +1,4 @@
-<!-- <script lang="ts">
+<script lang="ts">
     import { onMount } from 'svelte';
     import 'maplibre-gl/dist/maplibre-gl.css';
     import maplibregl from 'maplibre-gl';
@@ -36,4 +36,4 @@
     });
 </script>
 
-<div bind:this={mapElement} class="absolute inset-0 h-full w-full"></div> -->
+<div bind:this={mapElement} class="absolute inset-0 h-full w-full"></div>

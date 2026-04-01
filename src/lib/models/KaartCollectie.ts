@@ -1,4 +1,4 @@
-import { KaartItem } from './KaartItem';
+import { KaartItem } from './kaartItem';
 
 import data from '../content/data';
 

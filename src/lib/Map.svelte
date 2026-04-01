@@ -22,10 +22,10 @@
 	});
 
 	$effect(() => {
-    if (loaded && opacity) {
-        warpedMapLayer.setOpacity(opacity);
-    }
-});
+		if (loaded && opacity != null) {
+			warpedMapLayer.setOpacity(opacity);
+		}
+	});
 
 
 
