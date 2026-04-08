@@ -3,11 +3,23 @@
 	import MapView from '$lib/MapView.svelte';
 	import Nav from '$lib/Nav.svelte';
 	import { base } from '$app/paths';
-	import { comparison } from '$lib/store.svelte';
-	import data from '$lib/content/data';
+    import { comparison, flyTo } from '$lib/store.svelte';
+ 	import data from '$lib/content/data';
 
 	if (!comparison.leftAnnotation) comparison.leftAnnotation = data[0].annotation;
 	if (!comparison.rightAnnotation) comparison.rightAnnotation = data[1].annotation;
+      let zoekterm = $state('');
+async function zoek() {
+      if (!zoekterm) return;
+      const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(zoekterm)}&format=json&limit=1`);
+      const data = await res.json();
+     if (data.length > 0) {
+        flyTo.center = [parseFloat(data[0].lon), parseFloat(data[0].lat)];
+    }
+}
+
+
+
 </script>
 
 <div class="flex h-screen flex-col">
@@ -17,10 +29,13 @@
 		<div class="flex items-center space-x-35">
 			<div class="flex items-center rounded bg-white px-2 py-1">
 				<input
-					type="text"
-					placeholder="Zoek locatie..."
-					class="w-48 bg-transparent text-gray-800 text-sm outline-none"
-				/>
+    type="text"
+    placeholder="Zoek locatie..."
+    class="w-48 bg-transparent text-gray-800 text-sm outline-none"
+    bind:value={zoekterm}
+    onkeydown={(e) => e.key === 'Enter' && zoek()}
+/>
+
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
 				</svg>
@@ -37,8 +52,8 @@
 			</button>
 
 			<h1 class="text-2xl font-bold" style="font-family: 'Barlow Condensed', sans-serif;">Roffa reis door de tijd</h1>
-			<a href="{base}/tijdlijn">Over</a>
-			<a href="{base}/tijdlijn">Delen</a>
+			<a href="{base}/tijdlijn" class="hover:text-yellow-400">Over</a>
+			<a href="{base}/tijdlijn" class="hover:text-yellow-400">Delen</a>
 		</div>
 	</div>
 </nav>
@@ -52,21 +67,21 @@
 		</div>
 	</div>
 
-<!-- Vergelijkingsweergave: sidebar + kaart | kaart + sidebar -->
+<!-- Vergelijkingsweergave -->
 {:else}
 	<div class="flex flex-1 flex-row overflow-hidden">
 
-		<!-- Linker helft: sidebar links, kaart rechts -->
-		<Nav onSelect={(ann) => comparison.leftAnnotation = ann} />
+		<Nav onSelect={(ann) => comparison.leftAnnotation = ann} opacity={comparison.leftOpacity} onOpacityChange={(v) => comparison.leftOpacity = v} />
+
 		<div class="relative flex-1 border-r-2 border-gray-300">
-			<MapView annotation={comparison.leftAnnotation} />
+			<MapView annotation={comparison.leftAnnotation} opacity={comparison.leftOpacity} />
 		</div>
 
-		<!-- Rechter helft: kaart links, sidebar rechts -->
 		<div class="relative flex-1">
-			<MapView annotation={comparison.rightAnnotation} />
+			<MapView annotation={comparison.rightAnnotation} opacity={comparison.rightOpacity} />
 		</div>
-		<Nav onSelect={(ann) => comparison.rightAnnotation = ann} />
+
+		<Nav onSelect={(ann) => comparison.rightAnnotation = ann} opacity={comparison.rightOpacity} onOpacityChange={(v) => comparison.rightOpacity = v} />
 
 	</div>
 {/if}
