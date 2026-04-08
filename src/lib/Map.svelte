@@ -5,6 +5,7 @@
 	import { WarpedMapLayer } from '@allmaps/maplibre';
 	import { viewState } from './store.svelte';
 
+
 	let mapElement: HTMLDivElement;
 	let map: any;
 	let previousOpacity: number | undefined;
@@ -26,6 +27,14 @@
 			warpedMapLayer.setOpacity(opacity);
 		}
 	});
+
+
+	$effect(() => {
+    if (loaded && flyTo.center) {
+        map.flyTo({ center: flyTo.center, zoom: 14 });
+    }
+});
+
 
 
 
