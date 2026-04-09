@@ -3,7 +3,7 @@
 	import 'maplibre-gl/dist/maplibre-gl.css';
 	import maplibregl from 'maplibre-gl';
 	import { WarpedMapLayer } from '@allmaps/maplibre';
-	import { viewState } from './store.svelte';
+    import { viewState, flyTo } from './store.svelte';
 
 
 	let mapElement: HTMLDivElement;

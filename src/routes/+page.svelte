@@ -5,18 +5,14 @@
 	import { base } from '$app/paths';
     import { comparison, flyTo } from '$lib/store.svelte';
  	import data from '$lib/content/data';
+	import { Zoekservice } from '$lib/models/Zoekservice.svelte';
+
+const zoeker = new Zoekservice();
+
 
 	if (!comparison.leftAnnotation) comparison.leftAnnotation = data[0].annotation;
 	if (!comparison.rightAnnotation) comparison.rightAnnotation = data[1].annotation;
-      let zoekterm = $state('');
-async function zoek() {
-      if (!zoekterm) return;
-      const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(zoekterm)}&format=json&limit=1`);
-      const data = await res.json();
-     if (data.length > 0) {
-        flyTo.center = [parseFloat(data[0].lon), parseFloat(data[0].lat)];
-    }
-}
+
 
 
 
@@ -32,13 +28,33 @@ async function zoek() {
     type="text"
     placeholder="Zoek locatie..."
     class="w-48 bg-transparent text-gray-800 text-sm outline-none"
-    bind:value={zoekterm}
-    onkeydown={(e) => e.key === 'Enter' && zoek()}
+    bind:value={zoeker.zoekterm}
+    onkeydown={(e) => e.key === 'Enter' && zoeker.zoek()}
 />
+
 
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
 				</svg>
+
+							
+
+            {#if zoeker.resultaten.length > 0}     
+                <div class="absolute top-12 left-4 z-50 w-72 rounded bg-white shadow-lg">
+                    {#each zoeker.resultaten as resultaat}
+                        <button
+                            class="w-full px-3 py-2 text-left text-sm text-gray-800 hover:bg-gray-100 border-b border-gray-200"
+                            onclick={() => { flyTo.center = zoeker.kiesLocatie(resultaat); }}
+                        >
+                            {resultaat.display_name}
+                        </button>
+                    {/each}
+                </div>
+            {/if}
+
+			
+
+
 			</div>
 
 			<button
