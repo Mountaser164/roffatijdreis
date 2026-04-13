@@ -4,8 +4,8 @@ export class Zoekservice {
 
     async zoek() {
         if (!this.zoekterm) return;
-        const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(this.zoekterm)}&format=json&limit=5`);
-        this.resultaten = await res.json();
+       const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(this.zoekterm)}&format=json&limit=5&viewbox=4.3,52.0,4.6,51.85&bounded=1&countrycodes=nl`);
+    this.resultaten = await res.json();
     }
 
     kiesLocatie(resultaat: any): [number, number] {

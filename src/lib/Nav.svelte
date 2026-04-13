@@ -2,12 +2,15 @@
 	import { KaartCollectie } from '$lib/models/KaartCollectie';
 	import { viewState } from './store.svelte';
 
-	let { onSelect = null }: { onSelect?: ((annotation: string) => void) | null } = $props();
+	let { onSelect = null, opacity = null, onOpacityChange = null }: {
+		onSelect?: ((annotation: string) => void) | null,
+		opacity?: number | null,
+		onOpacityChange?: ((value: number) => void) | null
+	} = $props();
 
 	const collectie = new KaartCollectie();
 	const kaarten = collectie.getAlleKaarten();
 
-	// Bijhouden welk jaar actief is (dit is $state zodat Svelte het ziet)
 	let activeYear = $state(kaarten[0]?.metadata.year);
 
 	if (!onSelect) {
@@ -22,6 +25,17 @@
 			viewState.annotation = kaart.metadata.annotation;
 		}
 	}
+
+	function handleOpacity(e) {
+		const value = Number(e.target.value);
+		if (onOpacityChange) {
+			onOpacityChange(value);
+		} else {
+			viewState.opacity = value;
+		}
+	}
+
+	let currentOpacity = $derived(onSelect ? (opacity ?? 100) : viewState.opacity);
 </script>
 
 <aside
@@ -45,23 +59,22 @@
 		{/each}
 	</ul>
 
-	{#if !onSelect}
-		<div class="mt-6 border-t border-gray-200 pt-4">
-			<p class="mb-3 text-xs font-bold tracking-widest text-gray-500 uppercase">
-				Transparantie
-			</p>
-			<input
-				bind:value={viewState.opacity}
-				type="range"
-				min="0"
-				max="100"
-				class="w-full accent-green-700"
-			/>
-			<div class="mt-1 flex justify-between text-xs text-gray-400">
-				<span>0%</span>
-				<span class="font-bold text-gray-700">{viewState.opacity}%</span>
-				<span>100%</span>
-			</div>
+	<div class="mt-6 border-t border-gray-200 pt-4">
+		<p class="mb-3 text-xs font-bold tracking-widest text-gray-500 uppercase">
+			Transparantie
+		</p>
+		<input
+			value={currentOpacity}
+			oninput={handleOpacity}
+			type="range"
+			min="0"
+			max="100"
+			class="w-full accent-green-700"
+		/>
+		<div class="mt-1 flex justify-between text-xs text-gray-400">
+			<span>0%</span>
+			<span class="font-bold text-gray-700">{currentOpacity}%</span>
+			<span>100%</span>
 		</div>
-	{/if}
+	</div>
 </aside>

@@ -4,17 +4,25 @@
     import maplibregl from 'maplibre-gl';
     import { WarpedMapLayer } from '@allmaps/maplibre';
 
-    let { annotation }: { annotation: string } = $props();
+    let { annotation, opacity = 100 }: { annotation: string, opacity?: number } = $props();
 
     let mapElement: HTMLDivElement;
     let map: any;
     let loaded: boolean = $state(false);
     const warpedMapLayer = new WarpedMapLayer();
 
+    let derivedOpacity = $derived(opacity / 100);
+
     $effect(() => {
         if (loaded && annotation) {
             warpedMapLayer.clear();
             warpedMapLayer.addGeoreferenceAnnotationByUrl(annotation);
+        }
+    });
+
+    $effect(() => {
+        if (loaded && derivedOpacity != null) {
+            warpedMapLayer.setOpacity(derivedOpacity);
         }
     });
 
