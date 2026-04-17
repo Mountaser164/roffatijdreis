@@ -3,8 +3,7 @@
 	import 'maplibre-gl/dist/maplibre-gl.css';
 	import maplibregl from 'maplibre-gl';
 	import { WarpedMapLayer } from '@allmaps/maplibre';
-    import { viewState, flyTo } from './store.svelte';
-
+	import { viewState, flyTo, selectedLocation, mapView } from './store.svelte';
 
 	let mapElement: HTMLDivElement;
 	let map: any;
@@ -28,15 +27,22 @@
 		}
 	});
 
+	$effect(() => {
+		if (loaded && flyTo.center) {
+			map.flyTo({ center: flyTo.center, zoom: 14 });
+		}
+	});
 
 	$effect(() => {
-    if (loaded && flyTo.center) {
-        map.flyTo({ center: flyTo.center, zoom: 14 });
-    }
-});
+		if (loaded && selectedLocation.center) {
+			const marker = new maplibregl.Marker().setLngLat(selectedLocation.center).addTo(map);
 
-
-
+			setTimeout(() => {
+				marker.remove();
+				selectedLocation.center = null;
+			}, 3000);
+		}
+	});
 
 	onMount(async () => {
 		// Initialiseer de kaart - centreer op Rotterdam
@@ -53,9 +59,17 @@
 		map.on('load', async () => {
 			map.addLayer(warpedMapLayer);
 			loaded = true;
+
+			map.on('moveend', () => {
+				mapView.center = map.getCenter().toArray() as [number, number];
+				mapView.zoom = map.getZoom();
+			});
 		});
 	});
 
+
+
+	
 	function toggleMap(event: KeyboardEvent) {
 		if (event.repeat) return;
 		if (event.code === 'Space') {
@@ -68,8 +82,6 @@
 			}
 		}
 	}
-
-	
 </script>
 
 <svelte:window on:keydown={toggleMap} on:keyup={toggleMap} />
