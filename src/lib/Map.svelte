@@ -3,8 +3,7 @@
 	import 'maplibre-gl/dist/maplibre-gl.css';
 	import maplibregl from 'maplibre-gl';
 	import { WarpedMapLayer } from '@allmaps/maplibre';
-	import { viewState } from './store.svelte';
-
+	import { viewState, flyTo, selectedLocation, mapView } from './store.svelte';
 
 	let mapElement: HTMLDivElement;
 	let map: any;
@@ -28,15 +27,22 @@
 		}
 	});
 
+	$effect(() => {
+		if (loaded && flyTo.center) {
+			map.flyTo({ center: flyTo.center, zoom: 14 });
+		}
+	});
 
 	$effect(() => {
-    if (loaded && flyTo.center) {
-        map.flyTo({ center: flyTo.center, zoom: 14 });
-    }
-});
+		if (loaded && selectedLocation.center) {
+			const marker = new maplibregl.Marker().setLngLat(selectedLocation.center).addTo(map);
 
-
-
+			setTimeout(() => {
+				marker.remove();
+				selectedLocation.center = null;
+			}, 3000);
+		}
+	});
 
 	onMount(async () => {
 		// Initialiseer de kaart - centreer op Rotterdam
@@ -53,6 +59,20 @@
 		map.on('load', async () => {
 			map.addLayer(warpedMapLayer);
 			loaded = true;
+
+			map.on('moveend', () => {
+				const center = map.getCenter();
+				mapView.center = [center.lng, center.lat];
+				mapView.zoom = map.getZoom();
+
+				const params = new URLSearchParams({
+					lat: center.lat.toFixed(5),
+					lng: center.lng.toFixed(5),
+					zoom: map.getZoom().toFixed(2),
+					year: String(viewState.annotation)
+				});
+				history.replaceState({}, '', '?' + params.toString());
+			});
 		});
 	});
 
@@ -68,8 +88,6 @@
 			}
 		}
 	}
-
-	
 </script>
 
 <svelte:window on:keydown={toggleMap} on:keyup={toggleMap} />
