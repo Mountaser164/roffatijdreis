@@ -61,15 +61,21 @@
 			loaded = true;
 
 			map.on('moveend', () => {
-				mapView.center = map.getCenter().toArray() as [number, number];
+				const center = map.getCenter();
+				mapView.center = [center.lng, center.lat];
 				mapView.zoom = map.getZoom();
+
+				const params = new URLSearchParams({
+					lat: center.lat.toFixed(5),
+					lng: center.lng.toFixed(5),
+					zoom: map.getZoom().toFixed(2),
+					year: String(viewState.annotation)
+				});
+				history.replaceState({}, '', '?' + params.toString());
 			});
 		});
 	});
 
-
-
-	
 	function toggleMap(event: KeyboardEvent) {
 		if (event.repeat) return;
 		if (event.code === 'Space') {

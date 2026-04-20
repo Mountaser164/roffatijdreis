@@ -1,11 +1,12 @@
 <script lang="ts">
 	import Map from '$lib/Map.svelte';
+	import { onMount } from 'svelte';
 	import MapView from '$lib/MapView.svelte';
 	import Nav from '$lib/Nav.svelte';
 	import { base } from '$app/paths';
 	import data from '$lib/content/data';
 	import { Zoekservice } from '$lib/models/Zoekservice.svelte';
-	import { comparison, flyTo, selectedLocation } from '$lib/store.svelte';
+	import { comparison, flyTo, selectedLocation, mapView, viewState } from '$lib/store.svelte';
 
 	const zoeker = new Zoekservice();
 	let overOpen = $state(false);
@@ -13,6 +14,24 @@
 
 	if (!comparison.leftAnnotation) comparison.leftAnnotation = data[0].annotation;
 	if (!comparison.rightAnnotation) comparison.rightAnnotation = data[1].annotation;
+
+	onMount(() => {
+		const params = new URLSearchParams(window.location.search);
+		const lat = params.get('lat');
+		const lng = params.get('lng');
+		const zoom = params.get('zoom');
+		const year = params.get('year');
+
+		if (lat && lng) {
+			flyTo.center = [parseFloat(lng), parseFloat(lat)];
+			if (zoom) mapView.zoom = parseFloat(zoom);
+		}
+
+		if (year) {
+			const gevonden = data.find((d) => d.annotation === year);
+			if (gevonden) viewState.annotation = gevonden.annotation;
+		}
+	});
 </script>
 
 <div class="flex h-screen flex-col">
