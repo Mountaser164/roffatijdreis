@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Map from '$lib/Map.svelte';
 	import { onMount } from 'svelte';
-	import MapView from '$lib/MapView.svelte';
 	import Nav from '$lib/Nav.svelte';
 	import { base } from '$app/paths';
 	import data from '$lib/content/data';
@@ -12,8 +11,8 @@
 	let overOpen = $state(false);
 	let delenOpen = $state(false);
 
-	if (!comparison.leftAnnotation) comparison.leftAnnotation = data[0].annotation;
-	if (!comparison.rightAnnotation) comparison.rightAnnotation = data[1].annotation;
+	if (!comparison.leftAnnotation) comparison.leftAnnotation = data[0]?.annotation ?? '';
+	if (!comparison.rightAnnotation) comparison.rightAnnotation = data[1]?.annotation ?? '';
 
 	onMount(() => {
 		const params = new URLSearchParams(window.location.search);
@@ -134,11 +133,11 @@
 			/>
 
 			<div class="relative flex-1 border-r-2 border-gray-300">
-				<MapView annotation={comparison.leftAnnotation} opacity={comparison.leftOpacity} />
+				<Map annotation={comparison.leftAnnotation} opacity={comparison.leftOpacity} />
 			</div>
 
 			<div class="relative flex-1">
-				<MapView annotation={comparison.rightAnnotation} opacity={comparison.rightOpacity} />
+				<Map annotation={comparison.rightAnnotation} opacity={comparison.rightOpacity} />
 			</div>
 
 			<Nav
